@@ -23,11 +23,11 @@ Links: **[GameBanana mod page](https://gamebanana.com/gamefiles/16761) ⋅ [play
 	</tr>
 	<tr>
 	<td>
-		<a href='https://twitter.com/NoiceBroice'><b>NoiceBroice</b></a><br>
+		<a href='https://twitter.com/NoiceBroice'><b>   NoiceBroice</b></a><br>
 		<img src="art/NoiceBroice.png" alt="NoiceBroice" width="175" height="175">
 	</td>
 	<td>
-		<a href='https://twitter.com/TheLunar27'><b>TheLunar27</b></a> and <a href='https://twitter.com/evilsk8r'><b>Evilsk8r</b></a><br>
+		<a href='https://twitter.com/TheLunar27'><b>   TheLunar27  </b></a> and <a href='https://twitter.com/evilsk8r'><b>Evilsk8r</b></a><br>
 		<img src="art/TheLunar27.png" alt="TheLunar27" width="175" height="175">
 		<img src="art/Evil.png" alt="Evilsk8r" width="175" height="175"><br>
 	</td>
