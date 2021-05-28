@@ -24,7 +24,7 @@ Links: **[GameBanana mod page](https://gamebanana.com/gamefiles/16761) ⋅ [play
 	<tr>
 	<td>
 		<a href='https://twitter.com/NoiceBroice'><b>NinjaMuffin99</b></a><br>
-		<img src="art/Ninja.png" alt="NinjaMuffin99" width="175" height="175">
+		<img src="art/NoiceBroice.png" alt="NoiceBroice" width="175" height="175">
 	</td>
 	<td>
 		<a href='https://twitter.com/phantomarcade3k'><b>PhantomArcade3K</b></a> and <a href='https://twitter.com/evilsk8r'><b>Evilsk8r</b></a><br>
