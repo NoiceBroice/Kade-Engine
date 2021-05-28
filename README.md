@@ -20,6 +20,30 @@ Links: **[GameBanana mod page](https://gamebanana.com/gamefiles/16761) ⋅ [play
 
 
 # Credits
+### Mod Creators
+<table style="span:90%">
+	<tr>
+		<th style="text-align:left"><h3>🖥 Coders:</h3></th>
+		<th style="text-align:middle"><h3>🖼 Artists:</h3></th>
+		<th style="text-align:right"><h3>🎶 Musicians:</h3></th>
+	</tr>
+	<tr>
+	<td>
+		<a href='https://twitter.com/NoiceBroice'><b>NinjaMuffin99</b></a><br>
+		<img src="art/Ninja.png" alt="NinjaMuffin99" width="175" height="175">
+	</td>
+	<td>
+		<a href='https://twitter.com/phantomarcade3k'><b>PhantomArcade3K</b></a> and <a href='https://twitter.com/evilsk8r'><b>Evilsk8r</b></a><br>
+		<img src="art/Phantom.png" alt="PhantomArcade3K" width="175" height="175">
+		<img src="art/Evil.png" alt="Evilsk8r" width="175" height="175"><br>
+	</td>
+	<td>
+		<a href='https://twitter.com/kawaisprite'><b>Kawaisprite</b></a><br>
+		<img src="/art/Kawai.png" alt="Kawaisprite" width="175" height="175">
+	</tr>
+</table>
+
+
 
 ### Kade Engine
 - [KadeDeveloper](https://twitter.com/KadeDeveloper) - Maintainer and lead programmer
@@ -27,8 +51,27 @@ Links: **[GameBanana mod page](https://gamebanana.com/gamefiles/16761) ⋅ [play
 
 
 ### Friday Night Funkin'
- - [ninjamuffin99](https://twitter.com/ninja_muffin99) - Programming
- - [PhantomArcade3K](https://twitter.com/phantomarcade3k) and [Evilsk8r](https://twitter.com/evilsk8r) - Art
- - [Kawai Sprite](https://twitter.com/kawaisprite) - Music
+<!--me lol-->
+<table style="span:90%">
+	<tr>
+		<th style="text-align:left"><h3>🖥 Programmers:</h3></th>
+		<th style="text-align:middle"><h3>🖼 Artists:</h3></th>
+		<th style="text-align:right"><h3>🎶 Musicians:</h3></th>
+	</tr>
+	<tr>
+	<td>
+		<a href='https://twitter.com/ninja_muffin99'><b>NinjaMuffin99</b></a><br>
+		<img src="art/Ninja.png" alt="NinjaMuffin99" width="175" height="175">
+	</td>
+	<td>
+		<a href='https://twitter.com/phantomarcade3k'><b>PhantomArcade3K</b></a> and <a href='https://twitter.com/evilsk8r'><b>Evilsk8r</b></a><br>
+		<img src="art/Phantom.png" alt="PhantomArcade3K" width="175" height="175">
+		<img src="art/Evil.png" alt="Evilsk8r" width="175" height="175"><br>
+	</td>
+	<td>
+		<a href='https://twitter.com/kawaisprite'><b>Kawaisprite</b></a><br>
+		<img src="/art/Kawai.png" alt="Kawaisprite" width="175" height="175">
+	</tr>
+</table>
 
 This game was made with love to Newgrounds and its community. Extra love to Tom Fulp.
