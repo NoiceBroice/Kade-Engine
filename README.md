@@ -1,6 +1,6 @@
 # Friday Night Funkin': Teddy Twosome
 ## Teddy Twosome
-**Teddy Twosome** is a mod for Friday Night Funkin' built off of Kade Engine.
+**Teddy Twosome** is a the for some and it so if you can do the and it for me and you then it can if you will
 
 
 
