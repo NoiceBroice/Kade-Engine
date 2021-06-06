@@ -98,24 +98,23 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var menuItem:FlxSprite = new FlxSprite(0, FlxG.height * 1.6);
+			var menuItem:FlxSprite = new FlxSprite(0,350);
 			menuItem.frames = tex;
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.screenCenter(X);
+			menuItem.scale.set(0.65,0.65);
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set();
 			menuItem.antialiasing = true;
 			if (firstStart)
 			{
 				{
-					FlxTween.tween(stitches, {x:200, y:-90}, 1, {ease: FlxEase.quadInOut, startDelay: 1.0});
-					trace(stitches.x);
-					trace(stitches.y);
-
-					FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, startDelay:1.0, onComplete: function(flxTween:FlxTween) 
+					menuItemCenter();
+					FlxTween.tween(stitches, {x:-400, y:-90}, 1, {ease: FlxEase.quadInOut, startDelay: 1.0});
+			
+					FlxTween.tween(menuItem,{x:1325-menuItem.getGraphicMidpoint().x, y: 150 + (i * 120)},0.9 ,{ease: FlxEase.quadInOut, startDelay:1.0, onComplete: function(flxTween:FlxTween) 
 						{ 
 							finishedFunnyMove = true; 
 							changeItem();
@@ -124,9 +123,14 @@ class MainMenuState extends MusicBeatState
 			}
 			else
 			{
-				menuItem.y = 60 + (i * 160);
-				stitches.x = 100;
-				stitches.y = -90;
+				menuItemCenter();
+					FlxTween.tween(stitches, {x:-400, y:-90}, 1, {ease: FlxEase.quadInOut, startDelay: 0.4});
+			
+					FlxTween.tween(menuItem,{x:1325-menuItem.getGraphicMidpoint().x, y: 150 + (i * 120)},0.9 ,{ease: FlxEase.quadInOut, startDelay:0.4, onComplete: function(flxTween:FlxTween) 
+						{ 
+							finishedFunnyMove = true; 
+							changeItem();
+						}});
 			}
 		}
 	
@@ -228,14 +232,16 @@ class MainMenuState extends MusicBeatState
 			}
 		}
 
-		super.update(elapsed);
-
-		menuItems.forEach(function(spr:FlxSprite)
-		{
-			spr.screenCenter(X);
-		});
+		super.update(elapsed);		
 	}
-	
+
+	function menuItemCenter()
+	{	
+		menuItems.forEach(function(spr:FlxSprite)
+			{
+				spr.screenCenter(X);
+			});
+	}
 	function goToState()
 	{
 		var daChoice:String = optionShit[curSelected];
