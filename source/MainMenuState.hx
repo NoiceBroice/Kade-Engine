@@ -37,9 +37,9 @@ class MainMenuState extends MusicBeatState
 	var newGaming2:FlxText;
 	public static var firstStart:Bool = true;
 
-	public static var nightly:String = "-nightly-development";
+	public static var nightly:String = "- Teddy Twosome";
 
-	public static var kadeEngineVer:String = "1.5" + nightly;
+	public static var kadeEngineVer:String = "1.0 " + nightly;
 	public static var gameVer:String = "0.2.7.1";
 
 	var magenta:FlxSprite;
@@ -60,7 +60,7 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('menuBG'));
+		var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('blackbackmenu'));
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.10;
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
@@ -72,7 +72,7 @@ class MainMenuState extends MusicBeatState
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
-		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
+		magenta = new FlxSprite(-80).loadGraphic(Paths.image('blackbackmenu'));
 		magenta.scrollFactor.x = 0;
 		magenta.scrollFactor.y = 0.10;
 		magenta.setGraphicSize(Std.int(magenta.width * 1.1));
@@ -80,13 +80,20 @@ class MainMenuState extends MusicBeatState
 		magenta.screenCenter();
 		magenta.visible = false;
 		magenta.antialiasing = true;
-		magenta.color = 0xFFfd719b;
 		add(magenta);
 		// magenta.scrollFactor.set();
 
+		var stitches:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('stitchesmenu'));
+		stitches.scrollFactor.x = 0;
+		stitches.scrollFactor.y = 0;
+		stitches.setGraphicSize(Std.int(bg.width * 1.1));
+		stitches.updateHitbox();
+		stitches.screenCenter();
+		stitches.antialiasing = true;
+
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
-
+		add(stitches);
 		var tex = Paths.getSparrowAtlas('FNF_main_menu_assets');
 
 		for (i in 0...optionShit.length)
@@ -102,15 +109,27 @@ class MainMenuState extends MusicBeatState
 			menuItem.scrollFactor.set();
 			menuItem.antialiasing = true;
 			if (firstStart)
-				FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
-					{ 
-						finishedFunnyMove = true; 
-						changeItem();
-					}});
-			else
-				menuItem.y = 60 + (i * 160);
-		}
+			{
+				{
+					FlxTween.tween(stitches, {x:200, y:-90}, 1, {ease: FlxEase.quadInOut, startDelay: 1.0});
+					trace(stitches.x);
+					trace(stitches.y);
 
+					FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, startDelay:1.0, onComplete: function(flxTween:FlxTween) 
+						{ 
+							finishedFunnyMove = true; 
+							changeItem();
+						}});
+				}
+			}
+			else
+			{
+				menuItem.y = 60 + (i * 160);
+				stitches.x = 100;
+				stitches.y = -90;
+			}
+		}
+	
 		firstStart = false;
 
 		FlxG.camera.follow(camFollow, null, 0.60 * (60 / FlxG.save.data.fpsCap));
