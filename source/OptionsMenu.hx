@@ -154,7 +154,7 @@ class OptionsMenu extends MusicBeatState
 				
 					var text:FlxText = new FlxText(125,(95 * i) + 100, 0, option.getName(),34);
 					text.color = FlxColor.fromRGB(255,0,0);
-					text.setFormat("tahoma-bold.ttf", 60, FlxColor.RED);
+					text.setFormat("Hooman Stitch.ttf", 60, FlxColor.RED);
 					add(text);
 					currentOptions.push(text);
 				}
