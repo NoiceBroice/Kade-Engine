@@ -69,14 +69,17 @@ class OptionsMenu extends MusicBeatState
 	private var grpControls:FlxTypedGroup<Alphabet>;
 	public static var versionShit:FlxText;
 
+	public var currentOptions:Array<FlxText> = [];
+	var offsetPog:FlxText;
+	var targetY:Array<Float> = [];
+
 	var currentSelectedCat:OptionCategory;
 	var blackBorder:FlxSprite;
 	override function create()
 	{
 		instance = this;
-		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menuDesat"));
+		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image("optionsmenu"));
 
-		menuBG.color = 0xFFea71fd;
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 		menuBG.updateHitbox();
 		menuBG.screenCenter();
