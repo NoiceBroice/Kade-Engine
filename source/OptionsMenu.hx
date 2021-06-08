@@ -1,5 +1,6 @@
 package;
 
+import flixel.tweens.misc.ColorTween;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import openfl.Lib;
@@ -23,7 +24,7 @@ class OptionsMenu extends MusicBeatState
 	var curSelected:Int = 0;
 
 	var options:Array<OptionCategory> = [
-		new OptionCategory("Gameplay", [
+		new OptionCategory("GAMEPLAY", [
 			new DFJKOption(controls),
 			new DownscrollOption("Change the layout of the strumline."),
 			new GhostTapOption("Ghost Tapping is when you tap a direction and it doesn't give you a miss."),
@@ -37,10 +38,9 @@ class OptionsMenu extends MusicBeatState
 			// new OffsetMenu("Get a note offset based off of your inputs!"),
 			new CustomizeGameplay("Drag'n'Drop Gameplay Modules around to your preference")
 		]),
-		new OptionCategory("Appearance", [
+		new OptionCategory("APPEARANCE", [
 			#if desktop
 			new DistractionsAndEffectsOption("Toggle stage distractions that can hinder your gameplay."),
-			new RainbowFPSOption("Make the FPS Counter Rainbow"),
 			new AccuracyOption("Display accuracy information."),
 			new NPSDisplayOption("Shows your current Notes Per Second."),
 			new SongPositionOption("Show the songs current position (as a bar)"),
@@ -78,7 +78,7 @@ class OptionsMenu extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite(-10,-10).loadGraphic(Paths.image('optionsmenu'));
 		add(bg);
 
-		var shade:FlxSprite = new FlxSprite(-205,-100).loadGraphic(Paths.image('Shadescreen'));
+		var shade:FlxSprite = new FlxSprite(-205,-100).loadGraphic(Paths.image('Shadescreen', 'shared'));
 		shade.setGraphicSize(Std.int(shade.width * 0.65));
 		add(shade);
 
@@ -86,9 +86,9 @@ class OptionsMenu extends MusicBeatState
 		{
 			var option:OptionCategory = options[i];
 
-			var text:FlxText = new FlxText(125,(95 * i) + 100, 0, option.getName(),34);
-			text.color = FlxColor.fromRGB(255,0,0);
-			text.setFormat("Hooman Stitch.ttf", 60, FlxColor.RED);
+			var text:FlxText = new FlxText(125,(80 * i) + 175, 0, option.getName(),20);
+			text.color = FlxColor.fromRGB(255,255,255);
+			text.setFormat("Hooman Stitch.ttf", 40, FlxColor.WHITE);
 			add(text);
 			currentOptions.push(text);
 
@@ -100,13 +100,13 @@ class OptionsMenu extends MusicBeatState
 
 		currentDescription = "none";
 
-		currentOptions[0].color = FlxColor.WHITE;
+		currentOptions[0].color = FlxColor.RED;
 
 		offsetPog = new FlxText(125,600,0,"Offset: " + FlxG.save.data.offset);
-		offsetPog.setFormat("Hooman Stitch.ttf",42,FlxColor.RED);
+		offsetPog.setFormat("Hooman Stitch.ttf",30,FlxColor.WHITE);
 		add(offsetPog);
 
-		menuShade = new FlxSprite(-1350,-1190).loadGraphic(Paths.image("Menu Shade"));
+		menuShade = new FlxSprite(-1350,-1190).loadGraphic(Paths.image("Menu Shade", "shared"));
 		menuShade.setGraphicSize(Std.int(menuShade.width * 0.7));
 		add(menuShade);
 
@@ -152,16 +152,16 @@ class OptionsMenu extends MusicBeatState
 					// redo shit
 					var option:OptionCategory = options[i];
 				
-					var text:FlxText = new FlxText(125,(95 * i) + 100, 0, option.getName(),34);
-					text.color = FlxColor.fromRGB(255,0,0);
-					text.setFormat("Hooman Stitch.ttf", 60, FlxColor.RED);
+					var text:FlxText = new FlxText(125,(80 * i) + 175, 0, option.getName(),20);
+					text.color = FlxColor.fromRGB(255,255,255);
+					text.setFormat("Hooman Stitch.ttf", 40, FlxColor.WHITE);
 					add(text);
 					currentOptions.push(text);
 				}
 				remove(menuShade);
 				add(menuShade);
 				curSelected = 0;
-				currentOptions[curSelected].color = FlxColor.WHITE;
+				currentOptions[curSelected].color = FlxColor.RED;
 		}
 		if (FlxG.keys.justPressed.UP)
 			changeSelection(-1);
@@ -259,16 +259,16 @@ class OptionsMenu extends MusicBeatState
 	
 								trace(option.getDisplay());
 	
-								var text:FlxText = new FlxText(125,(95 * i) + 100, 0, option.getDisplay(),34);
-								text.color = FlxColor.fromRGB(255,0,0);
-								text.setFormat("Hooman Stitch.ttf", 60, FlxColor.RED);
+								var text:FlxText = new FlxText(125,(80 * i) + 175, 0, option.getDisplay(),20);
+								text.color = FlxColor.fromRGB(255,255,255);
+								text.setFormat("Hooman Stitch.ttf", 40, FlxColor.WHITE);
 								add(text);
 								currentOptions.push(text);
 							}
 							remove(menuShade);
 							add(menuShade);
 							trace('done');
-						currentOptions[curSelected].color = FlxColor.WHITE;
+						currentOptions[curSelected].color = FlxColor.RED;
 					}
 				}
 				else
@@ -285,16 +285,16 @@ class OptionsMenu extends MusicBeatState
 
 							trace(option.getDisplay());
 
-							var text:FlxText = new FlxText(125,(95 * i) + 100, 0, option.getDisplay(),34);
+							var text:FlxText = new FlxText(125,(80 * i) + 175, 0, option.getDisplay(),20);
 							text.color = FlxColor.fromRGB(255,0,0);
-							text.setFormat("Hooman Stitch.ttf", 60, FlxColor.RED);
+							text.setFormat("Hooman Stitch.ttf", 40, FlxColor.WHITE);
 							add(text);
 							currentOptions.push(text);
 						}
 						remove(menuShade);
 						add(menuShade);
 					curSelected = 0;
-					currentOptions[curSelected].color = FlxColor.WHITE;
+					currentOptions[curSelected].color = FlxColor.RED;
 				}
 			}
 		FlxG.save.flush();
@@ -311,7 +311,7 @@ class OptionsMenu extends MusicBeatState
 			
 		//FlxG.sound.play(Paths.sound("Hover",'clown'));
 	
-		currentOptions[curSelected].color = FlxColor.fromRGB(255,0,0);
+		currentOptions[curSelected].color = FlxColor.fromRGB(255,255,255);
 	
 		curSelected += change;
 	
@@ -321,7 +321,7 @@ class OptionsMenu extends MusicBeatState
 			curSelected = 0;
 	
 	
-		currentOptions[curSelected].color = FlxColor.WHITE;
+		currentOptions[curSelected].color = FlxColor.RED;
 	
 		var bullShit:Int = 0;
 		

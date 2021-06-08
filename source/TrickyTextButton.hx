@@ -8,6 +8,7 @@ import flixel.system.FlxSound;
 import flixel.FlxSprite;
 
 // tricky button but for text
+// im just tryna make the options menu man wtf are you do
 
 class TrickyTextButton extends FlxSprite
 {
@@ -30,8 +31,8 @@ class TrickyTextButton extends FlxSprite
         spriteOne = new FlxText(x,y,0,textOne, size);
         spriteTwo =  new FlxText(x,y,0,textTwo, size);
 
-        spriteOne.setFormat("Hooman Stitch.ttf",size,FlxColor.RED);
-        spriteTwo.setFormat("Hooman Stitch.ttf",size,FlxColor.WHITE);
+        spriteOne.setFormat("Hooman Stitch.ttf",size,FlxColor.WHITE);
+        spriteTwo.setFormat("Hooman Stitch.ttf",size,FlxColor.RED);
 
         spriteOne.antialiasing = true;
         spriteTwo.antialiasing = true;

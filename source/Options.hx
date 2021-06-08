@@ -439,28 +439,6 @@ class ScrollSpeedOption extends Option
 }
 
 
-class RainbowFPSOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		description = desc;
-	}
-
-	public override function press():Bool
-	{
-		FlxG.save.data.fpsRain = !FlxG.save.data.fpsRain;
-		(cast (Lib.current.getChildAt(0), Main)).changeFPSColor(FlxColor.WHITE);
-		display = updateDisplay();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "FPS Rainbow " + (!FlxG.save.data.fpsRain ? "off" : "on");
-	}
-}
-
 class NPSDisplayOption extends Option
 {
 	public function new(desc:String)
