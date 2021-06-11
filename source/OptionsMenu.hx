@@ -86,9 +86,9 @@ class OptionsMenu extends MusicBeatState
 		{
 			var option:OptionCategory = options[i];
 
-			var text:FlxText = new FlxText(125,(80 * i) + 175, 0, option.getName(),20);
+			var text:FlxText = new FlxText(125,(42 * i) + 175, 0, option.getName(),20);
 			text.color = FlxColor.fromRGB(255,255,255);
-			text.setFormat("Hooman Stitch.ttf", 40, FlxColor.WHITE);
+			text.setFormat("Hooman Stitch.ttf", 30, FlxColor.WHITE);
 			add(text);
 			currentOptions.push(text);
 
@@ -152,9 +152,9 @@ class OptionsMenu extends MusicBeatState
 					// redo shit
 					var option:OptionCategory = options[i];
 				
-					var text:FlxText = new FlxText(125,(80 * i) + 175, 0, option.getName(),20);
+					var text:FlxText = new FlxText(125,(42 * i) + 175, 0, option.getName(),20);
 					text.color = FlxColor.fromRGB(255,255,255);
-					text.setFormat("Hooman Stitch.ttf", 40, FlxColor.WHITE);
+					text.setFormat("Hooman Stitch.ttf", 30, FlxColor.WHITE);
 					add(text);
 					currentOptions.push(text);
 				}
@@ -259,9 +259,9 @@ class OptionsMenu extends MusicBeatState
 	
 								trace(option.getDisplay());
 	
-								var text:FlxText = new FlxText(125,(80 * i) + 175, 0, option.getDisplay(),20);
+								var text:FlxText = new FlxText(125,(42 * i) + 175, 0, option.getDisplay(),20);
 								text.color = FlxColor.fromRGB(255,255,255);
-								text.setFormat("Hooman Stitch.ttf", 40, FlxColor.WHITE);
+								text.setFormat("Hooman Stitch.ttf", 30, FlxColor.WHITE);
 								add(text);
 								currentOptions.push(text);
 							}
@@ -285,9 +285,9 @@ class OptionsMenu extends MusicBeatState
 
 							trace(option.getDisplay());
 
-							var text:FlxText = new FlxText(125,(80 * i) + 175, 0, option.getDisplay(),20);
+							var text:FlxText = new FlxText(125,(42 * i) + 175, 0, option.getDisplay(),20);
 							text.color = FlxColor.fromRGB(255,0,0);
-							text.setFormat("Hooman Stitch.ttf", 40, FlxColor.WHITE);
+							text.setFormat("Hooman Stitch.ttf", 30, FlxColor.WHITE);
 							add(text);
 							currentOptions.push(text);
 						}
