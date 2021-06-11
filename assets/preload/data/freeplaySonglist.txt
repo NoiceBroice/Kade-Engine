@@ -17,3 +17,6 @@ Winter Horrorland:monster-christmas:5
 Senpai:senpai:6
 Roses:senpai:6
 Thorns:spirit:6
+PlayTime:bf:7
+Stitched:bf:7
+Poltergiest:bf:7
