@@ -20,6 +20,7 @@ using StringTools;
 class FreeplayState extends MusicBeatState
 {
 	var songs:Array<SongMetadata> = [];
+	public var sprTrack:FlxSprite;
 
 	var selector:FlxText;
 	var curSelected:Int = 0;
@@ -34,6 +35,7 @@ class FreeplayState extends MusicBeatState
 	private var curPlaying:Bool = false;
 
 	private var iconArray:Array<HealthIcon> = [];
+	private var menubuttonArray:Array<FreeplayButtonBack> = [];
 
 	override function create()
 	{
@@ -68,30 +70,39 @@ class FreeplayState extends MusicBeatState
 
 		// LOAD CHARACTERS
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
-		add(bg);
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('blackbackmenu'));
+		bg.color = FlxColor.fromRGB(64, 196, 255);
+		add(bg);		
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
-		add(grpSongs);
+		//add(grpSongs);
 
 		for (i in 0...songs.length)
 		{
-			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false, true);
+			var menubutton:FreeplayButtonBack = new FreeplayButtonBack();
+			menubuttonArray.push(menubutton);
+			menubutton.scale.set(0.8,0.8);
+			add(menubutton);
+			var songText:Alphabet = new Alphabet(-19, (70 * i) + 30, songs[i].songName, true, false, true);
 			songText.isMenuItem = true;
 			songText.targetY = i;
+			songText.scale.set(0.7,0.7);
+			menubutton.sprTrack = songText; //will work split???
 			grpSongs.add(songText);
 
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
 			icon.sprTracker = songText;
-
+			icon.scale.set(0.8,0.8);
 			// using a FlxGroup is too much fuss!
 			iconArray.push(icon);
 			add(icon);
 
 			// songText.x += 40;
-			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
+			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !! 
+			// ^^ i did it bitch fuck you - Broice
 			// songText.screenCenter(X);
 		}
+		add(grpSongs);
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
 		// scoreText.autoSize = false;
@@ -305,6 +316,15 @@ class FreeplayState extends MusicBeatState
 		}
 
 		iconArray[curSelected].alpha = 1;
+
+		for (i in 0...menubuttonArray.length)
+		{
+			menubuttonArray[i].alpha = 0.6;
+			menubuttonArray[i].color = 0xFFFFFFFF;
+		}
+	
+		menubuttonArray[curSelected].alpha = 1;
+		menubuttonArray[curSelected].color = FlxColor.fromRGB(64, 196, 255);
 
 		for (item in grpSongs.members)
 		{
