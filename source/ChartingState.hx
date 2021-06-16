@@ -87,6 +87,7 @@ class ChartingState extends MusicBeatState
 	var gridBlackLine:FlxSprite;
 	var vocals:FlxSound;
 
+	var player3:Character = new Character(0,0, "dad");
 	var player2:Character = new Character(0,0, "dad");
 	var player1:Boyfriend = new Boyfriend(0,0, "bf");
 
@@ -113,6 +114,7 @@ class ChartingState extends MusicBeatState
 				needsVoices: true,
 				player1: 'bf',
 				player2: 'dad',
+				player3: 'dad',
 				gfVersion: 'gf',
 				noteStyle: 'normal',
 				stage: 'stage',
@@ -330,6 +332,14 @@ class ChartingState extends MusicBeatState
 
 		var player2Label = new FlxText(140,80,64,'Player 2');
 
+		var player3DropDown = new FlxUIDropDownMenu(140, 150, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
+			{
+				_song.player3 = characters[Std.parseInt(character)];
+			});
+			player3DropDown.selectedLabel = _song.player3;
+	
+			var player3Label = new FlxText(140,130,64,'Player 3');
+
 		var gfVersionDropDown = new FlxUIDropDownMenu(10, 200, FlxUIDropDownMenu.makeStrIdLabelArray(gfVersions, true), function(gfVersion:String)
 			{
 				_song.gfVersion = gfVersions[Std.parseInt(gfVersion)];
@@ -391,8 +401,10 @@ class ChartingState extends MusicBeatState
 		tab_group_assets.add(stageLabel);
 		tab_group_assets.add(player1DropDown);
 		tab_group_assets.add(player2DropDown);
+		tab_group_assets.add(player3DropDown);
 		tab_group_assets.add(player1Label);
 		tab_group_assets.add(player2Label);
+		tab_group_assets.add(player3Label);
 
 		UI_box.addGroup(tab_group_song);
 		UI_box.addGroup(tab_group_assets);
@@ -1055,6 +1067,10 @@ class ChartingState extends MusicBeatState
 		{
 			player2.playAnim('idle');
 		}
+		if (!player3.animation.curAnim.name.startsWith("sing"))
+			{
+				player3.playAnim('idle');
+			}
 		player1.dance();
 	}
 
