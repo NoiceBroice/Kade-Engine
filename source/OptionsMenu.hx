@@ -45,8 +45,6 @@ class OptionsMenu extends MusicBeatState
 			new NPSDisplayOption("Shows your current Notes Per Second."),
 			new SongPositionOption("Show the songs current position (as a bar)"),
 			new CpuStrums("CPU's strumline lights up when a note hits it."),
-			#else
-			new DistractionsAndEffectsOption("Toggle stage distractions that can hinder your gameplay.")
 			#end
 		]),
 		
@@ -57,7 +55,8 @@ class OptionsMenu extends MusicBeatState
 			#end
 			new FlashingLightsOption("Toggle flashing lights that can cause epileptic seizures and strain."),
 			new WatermarkOption("Enable and disable all watermarks from the engine."),
-			new BotPlay("Showcase your charts and mods with autoplay.")
+			new BotPlay("Showcase your charts and mods with autoplay."),
+			new ScoreScreen("Show the score screen after the end of a song")
 		])
 		
 	];
@@ -286,6 +285,8 @@ class OptionsMenu extends MusicBeatState
 					curSelected = 0;
 					currentOptions[curSelected].color = FlxColor.RED;
 				}
+				
+				changeSelection(curSelected);
 			}
 		FlxG.save.flush();
 	}
