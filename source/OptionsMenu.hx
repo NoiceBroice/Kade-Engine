@@ -71,12 +71,12 @@ class OptionsMenu extends MusicBeatState
 	var targetY:Array<Float> = [];
 
 	var currentSelectedCat:OptionCategory;
-	var menuShade:FlxSprite;
 
 	override function create()
 	{
-		var bg:FlxSprite = new FlxSprite(-10,-10).loadGraphic(Paths.image('optionsmenu'));
-		add(bg);
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('blackbackmenu'));
+		bg.color = FlxColor.fromRGB(255, 120, 193);
+		add(bg);	
 
 		var shade:FlxSprite = new FlxSprite(-205,-100).loadGraphic(Paths.image('Shadescreen', 'shared'));
 		shade.setGraphicSize(Std.int(shade.width * 0.65));
@@ -105,10 +105,6 @@ class OptionsMenu extends MusicBeatState
 		offsetPog = new FlxText(125,600,0,"Offset: " + FlxG.save.data.offset);
 		offsetPog.setFormat("Hooman Stitch.ttf",30,FlxColor.WHITE);
 		add(offsetPog);
-
-		menuShade = new FlxSprite(-1350,-1190).loadGraphic(Paths.image("Menu Shade", "shared"));
-		menuShade.setGraphicSize(Std.int(menuShade.width * 0.7));
-		add(menuShade);
 
 		super.create();
 	}
@@ -158,8 +154,6 @@ class OptionsMenu extends MusicBeatState
 					add(text);
 					currentOptions.push(text);
 				}
-				remove(menuShade);
-				add(menuShade);
 				curSelected = 0;
 				currentOptions[curSelected].color = FlxColor.RED;
 		}
@@ -265,8 +259,6 @@ class OptionsMenu extends MusicBeatState
 								add(text);
 								currentOptions.push(text);
 							}
-							remove(menuShade);
-							add(menuShade);
 							trace('done');
 						currentOptions[curSelected].color = FlxColor.RED;
 					}
@@ -291,8 +283,6 @@ class OptionsMenu extends MusicBeatState
 							add(text);
 							currentOptions.push(text);
 						}
-						remove(menuShade);
-						add(menuShade);
 					curSelected = 0;
 					currentOptions[curSelected].color = FlxColor.RED;
 				}
