@@ -212,6 +212,7 @@ class PlayState extends MusicBeatState
 	private var botPlayState:FlxText;
 	// Replay shit
 	private var saveNotes:Array<Dynamic> = [];
+	private var saveJudge:Array<String> = [];
 
 	public static var highestCombo:Int = 0;
 
@@ -272,7 +273,15 @@ class PlayState extends MusicBeatState
 
 		#if windows
 		// Making difficulty text for Discord Rich Presence.
-		storyDifficultyText = CoolUtil.difficultyFromInt(storyDifficulty);
+		switch (storyDifficulty)
+		{
+			case 0:
+				storyDifficultyText = "Easy";
+			case 1:
+				storyDifficultyText = "Normal";
+			case 2:
+				storyDifficultyText = "Hard";
+		}
 
 		iconRPC = SONG.player2;
 
@@ -954,7 +963,7 @@ class PlayState extends MusicBeatState
 				songPosBar.createFilledBar(FlxColor.GRAY, FlxColor.LIME);
 				add(songPosBar);
 	
-				var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - (SONG.song.length * 5),songPosBG.y,0,SONG.song, 16);
+				var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - 20,songPosBG.y,0,SONG.song, 16);
 				if (PlayStateChangeables.useDownscroll)
 					songName.y -= 3;
 				songName.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
@@ -978,7 +987,7 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 
 		// Add Kade Engine watermark
-		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " " + CoolUtil.difficultyFromInt(storyDifficulty) + (Main.watermarks ? " - KE " + MainMenuState.kadeEngineVer : ""), 16);
+		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " " + (storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") + (Main.watermarks ? " - KE " + MainMenuState.kadeEngineVer : ""), 16);
 		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		add(kadeEngineWatermark);
@@ -1373,7 +1382,7 @@ class PlayState extends MusicBeatState
 			songPosBar.createFilledBar(FlxColor.GRAY, FlxColor.LIME);
 			add(songPosBar);
 
-			var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - (SONG.song.length * 5),songPosBG.y,0,SONG.song, 16);
+			var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - 20,songPosBG.y,0,SONG.song, 16);
 			if (PlayStateChangeables.useDownscroll)
 				songName.y -= 3;
 			songName.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
@@ -1466,7 +1475,7 @@ class PlayState extends MusicBeatState
 
 			for (songNotes in section.sectionNotes)
 			{
-				var daStrumTime:Float = songNotes[0] + FlxG.save.data.offset + songOffset;
+				var daStrumTime:Float = Math.round(songNotes[0]) + FlxG.save.data.offset + songOffset;
 				if (daStrumTime < 0)
 					daStrumTime = 0;
 				var daNoteData:Int = Std.int(songNotes[1] % 4);
@@ -2547,7 +2556,7 @@ class PlayState extends MusicBeatState
 			campaignMisses = misses;
 
 		if (!loadRep)
-			rep.SaveReplay(saveNotes);
+			rep.SaveReplay(saveNotes, saveJudge);
 		else
 		{
 			PlayStateChangeables.botPlay = false;
@@ -3207,6 +3216,17 @@ class PlayState extends MusicBeatState
 					return null;
 				}
 
+			public function findByTimeIndex(time:Float):Int
+				{
+					for (i in 0...rep.replay.songNotes.length)
+					{
+						//trace('checking ' + Math.round(i[0]) + ' against ' + Math.round(time));
+						if (rep.replay.songNotes[i][0] == time)
+							return i;
+					}
+					return -1;
+				}
+
 			public var fuckingVolume:Float = 1;
 			public var useVideo = false;
 
@@ -3306,11 +3326,17 @@ class PlayState extends MusicBeatState
 			if (daNote != null)
 			{
 				if (!loadRep)
+				{
 					saveNotes.push([daNote.strumTime,0,direction,166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166]);
+					saveJudge.push("miss");
+				}
 			}
 			else
 				if (!loadRep)
+				{
 					saveNotes.push([Conductor.songPosition,0,direction,166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166]);
+					saveJudge.push("miss");
+				}
 
 			//var noteDiff:Float = Math.abs(daNote.strumTime - Conductor.songPosition);
 			//var wife:Float = EtternaFunctions.wife3(noteDiff, FlxG.save.data.etternaMode ? 1 : 1.7);
@@ -3452,9 +3478,12 @@ class PlayState extends MusicBeatState
 				var noteDiff:Float = -(note.strumTime - Conductor.songPosition);
 
 				if(loadRep)
+				{
 					noteDiff = findByTime(note.strumTime)[3];
-
-				note.rating = Ratings.CalculateRating(noteDiff);
+					note.rating = rep.replay.songJudgements[findByTimeIndex(note.strumTime)];
+				}
+				else
+					note.rating = Ratings.CalculateRating(noteDiff);
 
 				if (note.rating == "miss")
 					return;	
@@ -3506,6 +3535,7 @@ class PlayState extends MusicBeatState
 							array[1] = -1;
 						trace('pushing ' + array[0]);
 						saveNotes.push(array);
+						saveJudge.push(note.rating);
 					}
 					
 					playerStrums.forEach(function(spr:FlxSprite)
