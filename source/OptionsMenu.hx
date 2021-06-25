@@ -1,6 +1,7 @@
 package;
 
 import flixel.tweens.misc.ColorTween;
+import flixel.input.gamepad.FlxGamepad;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import openfl.Lib;
@@ -158,10 +159,27 @@ class OptionsMenu extends MusicBeatState
 				curSelected = 0;
 				currentOptions[curSelected].color = FlxColor.RED;
 		}
+		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
+
+		if (gamepad != null)
+		{
+			if (gamepad.justPressed.DPAD_UP)
+			{
+				FlxG.sound.play(Paths.sound('scrollMenu'));
+				changeSelection(-1);
+			}
+			if (gamepad.justPressed.DPAD_DOWN)
+			{
+				FlxG.sound.play(Paths.sound('scrollMenu'));
+				changeSelection(1);
+			}
+		}
 		if (FlxG.keys.justPressed.UP)
 			changeSelection(-1);
+			FlxG.sound.play(Paths.sound('scrollMenu'));
 		if (FlxG.keys.justPressed.DOWN)
 			changeSelection(1);
+			FlxG.sound.play(Paths.sound('scrollMenu'));
 		
 		if (isCat)
 		{
