@@ -18,6 +18,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import io.newgrounds.NG;
 import lime.app.Application;
+import motion.Actuate;
 
 #if windows
 import Discord.DiscordClient;
@@ -102,7 +103,7 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var menuItem:FlxSprite = new FlxSprite(0,350);
+			var menuItem:FlxSprite = new FlxSprite(0,400);
 			menuItem.frames = tex;
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
@@ -112,12 +113,13 @@ class MainMenuState extends MusicBeatState
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set();
 			menuItem.antialiasing = true;
+			menuItem.alpha = 0;
 			if (firstStart)
 			{
 				{
 					menuItemCenter();
 					FlxTween.tween(stitches, {x:-400, y:-90}, 1, {ease: FlxEase.quadInOut, startDelay: 1.0});
-			
+					Actuate.tween (menuItem, 3, { alpha: 1 },false).delay (1.2);
 					FlxTween.tween(menuItem,{x:1325-menuItem.getGraphicMidpoint().x, y: 150 + (i * 120)},0.9 ,{ease: FlxEase.quadInOut, startDelay:1.0, onComplete: function(flxTween:FlxTween) 
 						{ 
 							finishedFunnyMove = true; 
@@ -129,7 +131,7 @@ class MainMenuState extends MusicBeatState
 			{
 				menuItemCenter();
 					FlxTween.tween(stitches, {x:-400, y:-90}, 1, {ease: FlxEase.quadInOut, startDelay: 0.4});
-			
+					Actuate.tween (menuItem, 3, { alpha: 1 },false).delay (1.2);
 					FlxTween.tween(menuItem,{x:1325-menuItem.getGraphicMidpoint().x, y: 150 + (i * 120)},0.9 ,{ease: FlxEase.quadInOut, startDelay:0.4, onComplete: function(flxTween:FlxTween) 
 						{ 
 							finishedFunnyMove = true; 
