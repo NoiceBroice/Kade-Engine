@@ -172,21 +172,21 @@ class OptionsMenu extends MusicBeatState
 		{
 			if (gamepad.justPressed.DPAD_UP)
 			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+		//		FlxG.sound.play(Paths.sound('scrollMenu'));
 				changeSelection(-1);
 			}
 			if (gamepad.justPressed.DPAD_DOWN)
 			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+		//		FlxG.sound.play(Paths.sound('scrollMenu'));
 				changeSelection(1);
 			}
 		}
 		if (FlxG.keys.justPressed.UP)
 			changeSelection(-1);
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+		//	FlxG.sound.play(Paths.sound('scrollMenu'));
 		if (FlxG.keys.justPressed.DOWN)
 			changeSelection(1);
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+		//	FlxG.sound.play(Paths.sound('scrollMenu'));
 		
 		if (isCat)
 		{
@@ -328,6 +328,7 @@ class OptionsMenu extends MusicBeatState
 		#end
 			
 		//FlxG.sound.play(Paths.sound("Hover",'clown'));
+		FlxG.sound.play(Paths.sound('scrollMenu'));
 	
 		currentOptions[curSelected].color = FlxColor.fromRGB(255,255,255);
 	
