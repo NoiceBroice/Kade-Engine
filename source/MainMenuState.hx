@@ -131,7 +131,7 @@ class MainMenuState extends MusicBeatState
 			{
 				menuItemCenter();
 					FlxTween.tween(stitches, {x:-400, y:-90}, 1, {ease: FlxEase.quadInOut, startDelay: 0.4});
-					Actuate.tween (menuItem, 3, { alpha: 1 },false).delay (1.2);
+					Actuate.tween (menuItem, 2.7, { alpha: 1 },false).delay (0.6);
 					FlxTween.tween(menuItem,{x:1325-menuItem.getGraphicMidpoint().x, y: 150 + (i * 120)},0.9 ,{ease: FlxEase.quadInOut, startDelay:0.4, onComplete: function(flxTween:FlxTween) 
 						{ 
 							finishedFunnyMove = true; 
