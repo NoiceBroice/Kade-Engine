@@ -224,7 +224,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('hey', 'BF HEY', 24, false);
 
 				animation.addByPrefix('firstDeath', "BF dies", 24, false);
-				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
+				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, false);
 				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
 
 				animation.addByPrefix('scared', 'BF idle shaking', 24);
@@ -300,7 +300,7 @@ class Character extends FlxSprite
 				frames = Paths.getSparrowAtlas('bfPixelsDEAD','shared',true);
 				animation.addByPrefix('singUP', "BF Dies pixel", 24, false);
 				animation.addByPrefix('firstDeath', "BF Dies pixel", 24, false);
-				animation.addByPrefix('deathLoop', "Retry Loop", 24, true);
+				animation.addByPrefix('deathLoop', "Retry Loop", 24, false);
 				animation.addByPrefix('deathConfirm', "RETRY CONFIRM", 24, false);
 				animation.play('firstDeath');
 
@@ -407,7 +407,7 @@ class Character extends FlxSprite
 
 	public function loadOffsetFile(character:String)
 	{
-		var offset:Array<String> = CoolUtil.coolTextFile(Paths.txt('images/characters/' + character + "Offsets"));
+		var offset:Array<String> = CoolUtil.coolTextFile(Paths.txt('images/characters/' + character + "Offsets", 'shared'));
 
 		for (i in 0...offset.length)
 		{
@@ -452,13 +452,13 @@ class Character extends FlxSprite
 	/**
 	 * FOR GF DANCING SHIT
 	 */
-	public function dance()
+	public function dance(forced:Bool = false)
 	{
 		if (!debugMode)
 		{
 			switch (curCharacter)
 			{
-				case 'gf':
+				case 'gf' | 'gf-christmas' | 'gf-car' | 'gf-pixel':
 					if (!animation.curAnim.name.startsWith('hair'))
 					{
 						danced = !danced;
@@ -468,39 +468,6 @@ class Character extends FlxSprite
 						else
 							playAnim('danceLeft');
 					}
-
-				case 'gf-christmas':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-
-				case 'gf-car':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-				case 'gf-pixel':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-
 				case 'spooky':
 					danced = !danced;
 
@@ -509,7 +476,7 @@ class Character extends FlxSprite
 					else
 						playAnim('danceLeft');
 				default:
-					playAnim('idle');
+					playAnim('idle', forced);
 			}
 		}
 	}
