@@ -99,6 +99,7 @@ class PlayState extends MusicBeatState
 	public static var noteBools:Array<Bool> = [false, false, false, false];
 
 	var halloweenLevel:Bool = false;
+	var dad2real:Bool = false;
 
 	var songLength:Float = 0;
 	var kadeEngineWatermark:FlxText;
@@ -116,6 +117,7 @@ class PlayState extends MusicBeatState
 	public var originalX:Float;
 
 	public static var dad:Character;
+	public static var dad2:Character;
 	public static var gf:Character;
 	public static var boyfriend:Boyfriend;
 
@@ -872,8 +874,21 @@ class PlayState extends MusicBeatState
 		gf.scrollFactor.set(0.95, 0.95);
 
 		dad = new Character(100, 100, SONG.player2);
+		dad2 = new Character(100, 100, SONG.player3);
 
 		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
+		
+		//how tf make thing do the thing any of those songs do it and???
+		switch (songLowercase) {
+			case 'playtime'/* || 'stitched' || 'poltergiest'*/:
+				dad2real = true;
+			case 'stitched':
+				dad2real = true;
+			case 'poltergiest':
+				dad2real = true;
+			default:
+				dad2real = false;
+		}
 
 		switch (SONG.player2)
 		{
@@ -962,7 +977,8 @@ class PlayState extends MusicBeatState
 			// Shitty layering but whatev it works LOL
 			if (curStage == 'limo')
 				add(limo);
-
+			if (dad2real)
+				add(dad2);
 			add(dad);
 			add(boyfriend);
 		}
@@ -1346,6 +1362,8 @@ class PlayState extends MusicBeatState
 		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 		{
 			dad.dance();
+			if (dad2real)
+				dad2.dance();
 			gf.dance();
 			boyfriend.playAnim('idle');
 
@@ -3784,10 +3802,14 @@ class PlayState extends MusicBeatState
 		remove(gf);
 		remove(boyfriend);
 		remove(dad);
+		if (dad2real)
+			remove(dad2);
 		add(videoSprite);
 		add(gf);
 		add(boyfriend);
 		add(dad);
+		if (dad2real)
+			add(dad2);
 
 		trace('poggers');
 
@@ -4230,6 +4252,8 @@ class PlayState extends MusicBeatState
 			if ((SONG.notes[Math.floor(curStep / 16)].mustHitSection || !dad.animation.curAnim.name.startsWith("sing")) && dad.curCharacter != 'gf')
 				if (curBeat % idleBeat == 0)
 					dad.dance(idleToBeat);
+					if (dad2real)
+						dad2.dance(idleToBeat);
 		}
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
