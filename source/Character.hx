@@ -26,7 +26,10 @@ class Character extends FlxSprite
 		this.isPlayer = isPlayer;
 
 		var tex:FlxAtlasFrames;
-		antialiasing = true;
+		if(FlxG.save.data.antialiasing)
+			{
+				antialiasing = true;
+			}
 
 		switch (curCharacter)
 		{
@@ -345,7 +348,7 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 			case 'spirit':
-				frames = Paths.getPackerAtlas('spirit','shared',true);
+				frames = Paths.getPackerAtlas('spirit','shared',false);
 				animation.addByPrefix('idle', "idle spirit_", 24, false);
 				animation.addByPrefix('singUP', "up_", 24, false);
 				animation.addByPrefix('singRIGHT', "right_", 24, false);
@@ -405,9 +408,9 @@ class Character extends FlxSprite
 		}
 	}
 
-	public function loadOffsetFile(character:String)
+	public function loadOffsetFile(character:String, library:String = 'shared')
 	{
-		var offset:Array<String> = CoolUtil.coolTextFile(Paths.txt('images/characters/' + character + "Offsets", 'shared'));
+		var offset:Array<String> = CoolUtil.coolTextFile(Paths.txt('images/characters/' + character + "Offsets", library));
 
 		for (i in 0...offset.length)
 		{

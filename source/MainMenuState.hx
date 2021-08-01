@@ -71,7 +71,10 @@ class MainMenuState extends MusicBeatState
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
 		bg.updateHitbox();
 		bg.screenCenter();
-		bg.antialiasing = true;
+		if(FlxG.save.data.antialiasing)
+			{
+				bg.antialiasing = true;
+			}
 		add(bg);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -84,7 +87,10 @@ class MainMenuState extends MusicBeatState
 		magenta.updateHitbox();
 		magenta.screenCenter();
 		magenta.visible = false;
-		magenta.antialiasing = true;
+		if(FlxG.save.data.antialiasing)
+			{
+				magenta.antialiasing = true;
+			}
 		add(magenta);
 		// magenta.scrollFactor.set();
 
@@ -94,7 +100,10 @@ class MainMenuState extends MusicBeatState
 		stitches.setGraphicSize(Std.int(bg.width * 1.1));
 		stitches.updateHitbox();
 		stitches.screenCenter();
-		stitches.antialiasing = true;
+		if(FlxG.save.data.antialiasing)
+			{
+				stitches.antialiasing = true;
+			}
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
@@ -112,7 +121,10 @@ class MainMenuState extends MusicBeatState
 			menuItem.scale.set(0.65,0.65);
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set();
-			menuItem.antialiasing = true;
+			if(FlxG.save.data.antialiasing)
+				{
+					menuItem.antialiasing = true;
+				}
 			menuItem.alpha = 0;
 			if (firstStart)
 			{

@@ -78,6 +78,10 @@ class Main extends Sprite
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
 
+		#if !cpp
+		framerate = 60;
+		#end
+
 		#if cpp
 		initialState = Caching;
 		game = new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen);
@@ -85,9 +89,6 @@ class Main extends Sprite
 		game = new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen);
 		#end
 		addChild(game);
-
-		PlayerSettings.init();
-
 		#if windows
 		DiscordClient.initialize();
 
@@ -96,13 +97,6 @@ class Main extends Sprite
 		 });
 		 
 		#end
-
-		
-		Highscore.load();
-
-		FlxG.save.bind('funkin', 'ninjamuffin99');
-
-		KadeEngineData.initSave();
 
 		#if !mobile
 		fpsCounter = new FPS(10, 3, 0xFFFFFF);

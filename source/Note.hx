@@ -33,6 +33,8 @@ class Note extends FlxSprite
 	public var originColor:Int = 0; // The sustain note's original note's color
 	public var noteSection:Int = 0;
 
+	public var noteCharterObject:FlxSprite;
+
 	public var noteScore:Float = 1;
 
 	public var noteYOff:Int = 0;
@@ -80,8 +82,14 @@ class Note extends FlxSprite
 		}
 		else
 		{
-			this.strumTime = Math.round(strumTime);
+			this.strumTime = strumTime;
 			rStrumTime = strumTime - (FlxG.save.data.offset + PlayState.songOffset);
+			#if sys
+			if (PlayState.isSM)
+			{
+				rStrumTime = Math.round(rStrumTime + Std.parseFloat(PlayState.sm.header.OFFSET));
+			}
+			#end
 		}
 
 
@@ -108,7 +116,10 @@ class Note extends FlxSprite
 
 			setGraphicSize(Std.int(width * 0.7));
 			updateHitbox();
-			antialiasing = true;
+			if(FlxG.save.data.antialiasing)
+				{
+					antialiasing = true;
+				}
 		}
 		else
 		{
@@ -144,7 +155,11 @@ class Note extends FlxSprite
 
 					setGraphicSize(Std.int(width * 0.7));
 					updateHitbox();
-					antialiasing = true;
+					
+					if(FlxG.save.data.antialiasing)
+						{
+							antialiasing = true;
+						}
 			}
 		}
 
