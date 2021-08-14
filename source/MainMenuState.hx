@@ -53,6 +53,7 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
+		clean();
 		#if windows
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
@@ -71,10 +72,7 @@ class MainMenuState extends MusicBeatState
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
 		bg.updateHitbox();
 		bg.screenCenter();
-		if(FlxG.save.data.antialiasing)
-			{
-				bg.antialiasing = true;
-			}
+		bg.antialiasing = FlxG.save.data.antialiasing;
 		add(bg);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -87,10 +85,7 @@ class MainMenuState extends MusicBeatState
 		magenta.updateHitbox();
 		magenta.screenCenter();
 		magenta.visible = false;
-		if(FlxG.save.data.antialiasing)
-			{
-				magenta.antialiasing = true;
-			}
+		magenta.antialiasing = FlxG.save.data.antialiasing;
 		add(magenta);
 		// magenta.scrollFactor.set();
 
@@ -121,10 +116,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.scale.set(0.65,0.65);
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set();
-			if(FlxG.save.data.antialiasing)
-				{
-					menuItem.antialiasing = true;
-				}
+			menuItem.antialiasing = FlxG.save.data.antialiasing;
 			menuItem.alpha = 0;
 			if (firstStart)
 			{

@@ -36,6 +36,7 @@ class OptionsMenu extends MusicBeatState
 			new ScrollSpeedOption("Change your scroll speed. (1 = Chart dependent)"),
 			new AccuracyDOption("Change how accuracy is calculated. (Accurate = Simple, Complex = Milisecond Based)"),
 			new ResetButtonOption("Toggle pressing R to gameover."),
+			new InstantRespawn("Toggle if you instantly respawn after dying."),
 			// new OffsetMenu("Get a note offset based off of your inputs!"),
 			new CustomizeGameplay("Drag and drop gameplay modules to your prefered positions!")
 		]),
@@ -89,10 +90,7 @@ class OptionsMenu extends MusicBeatState
 	{
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('blackbackmenu'));
 		bg.color = FlxColor.fromRGB(255, 120, 193);
-		if(FlxG.save.data.antialiasing)
-			{
-				bg.antialiasing = true;
-			}
+		bg.antialiasing = FlxG.save.data.antialiasing;
 		add(bg);	
 
 		var shade:FlxSprite = new FlxSprite(-205,-100).loadGraphic(Paths.image('Shadescreen', 'shared'));
@@ -144,7 +142,11 @@ class OptionsMenu extends MusicBeatState
 
 		if (MusicMenu.Vocals != null)
 		{
-			if (MusicMenu.Vocals.playing)
+			if (controls.BACK && !isCat)
+			{
+				FlxG.switchState(new MainMenuState());
+			}
+			else if (controls.BACK)
 			{
 				if (FlxG.sound.music.time > MusicMenu.Vocals.time + 20 || FlxG.sound.music.time < MusicMenu.Vocals.time - 20)
 					resyncVocals();
